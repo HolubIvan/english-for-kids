@@ -48,6 +48,7 @@ body {
   padding: 130px 50px;
   transition: all 0.3s;
   display: none;
+  z-index: 100;
 }
 .navbar__list {
   width: 70%;
@@ -62,6 +63,10 @@ body {
   text-decoration: none;
   color: #fff;
   cursor: pointer;
+}
+
+.navbar__link:hover {
+  color: #7b7b7b;
 }
 
 .card {
@@ -87,12 +92,20 @@ body {
   box-shadow: 0 0 10px 0 #000;
   text-align: center;
   color: #000;
+  position: relative;
 }
 .card__front__img {
   max-width: 100%;
 }
 .card__front__title {
   font-size: 3rem;
+}
+.card__front__arrows {
+  width: 23px;
+  height: 23px;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
 }
 .card__back {
   width: 100%;
@@ -112,14 +125,6 @@ body {
 }
 .card__back__title {
   font-size: 3rem;
-}
-
-.card:hover .card__front {
-  transform: rotateY(-180deg);
-}
-
-.card:hover .card__back {
-  transform: rotateY(0);
 }
 
 .card-main {
@@ -230,7 +235,7 @@ body {
   top: 2px;
   left: 0;
   cursor: pointer;
-  z-index: 100;
+  z-index: 200;
 }
 .hamburger__checkbox {
   display: none;

@@ -9,6 +9,7 @@
     padding: 130px 50px;
     transition: all .3s;
     display: none;
+    z-index: 100;
 
 
 
@@ -28,4 +29,8 @@
         color: $color-white;
         cursor: pointer;
     }
+}
+
+.navbar__link:hover{
+    color: $color-grey;
 }
