@@ -2,11 +2,13 @@
 
     width: 380px;
     height: 100vh;
-    background-color: rgba(87, 154, 87, .6);
+    background: linear-gradient($color-light-green, $color-dark-green);
     position: fixed;
     top: 0;
     left: 0;
     padding: 130px 50px;
+    opacity: 0;
+    transition: all .3s;
 
 
 

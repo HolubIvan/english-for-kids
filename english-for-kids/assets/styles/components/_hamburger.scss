@@ -46,3 +46,7 @@
         border-radius: 10px;
     }
 }
+
+.hamburger__checkbox:checked ~ .navbar{
+    opacity: 1;
+}
