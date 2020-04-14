@@ -1,0 +1,27 @@
+{
+  "name": "english-for-kids",
+  "version": "1.0.0",
+  "description": "App using Vanilla JS",
+  "main": "index.js",
+  "scripts": {
+    "style": "sass assets/styles/main.scss assets/styles/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HolubIvan/english-for-kids.git"
+  },
+  "author": "Ivan Holub",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HolubIvan/english-for-kids/issues"
+  },
+  "homepage": "https://github.com/HolubIvan/english-for-kids#readme",
+  "dependencies": {
+    "sass": "^1.26.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2"
+  }
+}

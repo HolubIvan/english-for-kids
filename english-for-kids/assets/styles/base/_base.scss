@@ -1,0 +1,25 @@
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+    box-sizing: inherit;
+}
+
+
+html {
+	font-size: 62.5%; //1rem = 10px
+    box-sizing: border-box;
+    letter-spacing: .1rem;
+    font-family: 'Lato', sans-serif;
+}
+
+body{
+    overflow: hidden;
+    color: $color-black;
+}
+
+.wrapper{
+    max-width: 1300px;
+    margin: 0 auto;
+}
