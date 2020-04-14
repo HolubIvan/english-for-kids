@@ -20,12 +20,15 @@
 // 4. Layout-related sections
 @import
   'layout/header',
+  'layout/main',
   'layout/navigation',
   'layout/footer';
 
 // 5. Components
 @import
   'components/button',
+  'components/card',
+  'components/card-main',
   'components/switch',
   'components/hamburger';
 

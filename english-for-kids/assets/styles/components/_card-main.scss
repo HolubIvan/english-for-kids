@@ -1,0 +1,33 @@
+.card-main{
+    width: 280px;
+    height: 260px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 $color-black;
+    display: flex;
+    flex-direction: column;
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    background: linear-gradient($color-light-green, $color-dark-green);
+    color: $color-white;
+    transition: all .3s;
+
+    &__img{
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        border: 10px solid #fff;
+        object-fit: cover;
+        margin: 30px auto;
+    }
+}
+
+.card-main:hover{
+    box-shadow: 0 0 20px 0 $color-black;
+}
+
+.card-main:active{
+    box-shadow: 0 0 14px 0 $color-black;
+}

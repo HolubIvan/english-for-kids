@@ -26,12 +26,12 @@
     &__label{
         width: 100%;
         height: 100%;
-        z-index: 1000;
         display: inline-block;
         position: absolute;
         top: 2px;
         left: 0;
-        cursor: pointer;
+        cursor: pointer;    
+        z-index: 100; 
     }
     
     &__checkbox{
@@ -44,9 +44,10 @@
         height: 5px;
         background-color: $color-grey;
         border-radius: 10px;
+        z-index: 200;
     }
 }
 
 .hamburger__checkbox:checked ~ .navbar{
-    opacity: 1;
+    display: block;
 }
