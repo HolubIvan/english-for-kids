@@ -7,10 +7,10 @@
     top: 0;
     left: 0;
     padding: 130px 50px;
-    transition: all .3s;
-    display: none;
-    z-index: 100;
-
+    transition: all .6s;
+    display: block;
+    transform: translateX(-400px);
+    z-index: 1;
 
 
     &__list{
