@@ -4,4 +4,17 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
+    justify-items: center;
+
+    @include media-1200{
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include media-900{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media-630{
+        grid-template-columns: 1fr;
+    }
 }

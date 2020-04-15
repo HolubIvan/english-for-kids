@@ -1,19 +1,17 @@
+@mixin media-1200 {
+    @media (max-width: $screen-1200) {
+        @content;
+    }
+}
 
-// @mixin on-event($self: false) {
-//   @if $self {
-//     &,
-//     &:hover,
-//     &:active,
-//     &:focus {
-//       @content;
-//     }
-//   } @else {
-//     &:hover,
-//     &:active,
-//     &:focus {
-//       @content;
-//     }
-//   }
-// }
+@mixin media-900 {
+    @media (max-width: $screen-900) {
+        @content;
+    }
+}
 
-
+@mixin media-630 {
+    @media (min-width: $screen-320) and (max-width: $screen-630) {
+        @content;
+    }
+}
