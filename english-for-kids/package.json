@@ -4,7 +4,9 @@
   "description": "App using Vanilla JS",
   "main": "index.js",
   "scripts": {
-    "style": "sass assets/styles/main.scss assets/styles/style.css"
+    "style": "sass assets/styles/main.scss assets/styles/style.css",
+    "dev": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -20,8 +22,15 @@
     "sass": "^1.26.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "babel-loader": "^8.1.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2"
+    "eslint-plugin-import": "^2.20.2",
+    "path": "^0.12.7",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   }
 }
