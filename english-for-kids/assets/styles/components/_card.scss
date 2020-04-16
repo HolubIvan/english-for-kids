@@ -64,10 +64,16 @@
     }
 }
 
-.card:hover .card__front{
+// .card:hover .card__front{
+//     transform: rotateY(-180deg);
+// }
+
+// .card:hover .card__back{
+//     transform: rotateY(0);
+// }
+.rotateBack{
     transform: rotateY(-180deg);
 }
-
-.card:hover .card__back{
+.rotateFront{
     transform: rotateY(0);
 }

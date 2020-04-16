@@ -72,21 +72,33 @@ const createCategories = (object) => {
 // }
 
 
+
+// layout handler for changing categories to cards
 layout.addEventListener('click', (event)=>{
 
+    //part for main page when we change categories to cards
+    if(event.target.closest('.card-main')){
+        for(let key in cards){
+            if(event.target.closest('.card-main').getAttribute('href') === `#${key}`){
+                layout.innerHTML = ''
+                createCards(key); 
+           }
+        }
+    }
 
-    // if(event.target.closest('.card-main').getAttribute('href') === '#Action (set C)'){
-    //      console.log(cards['Action (set C)'])
-    // }
+    //part for cards when we push for arrwos to change side of card
+    if(event.target.closest('.card')){
+    
+       if(event.target.className === 'card__front__arrows'){
+            event.target.parentNode.parentNode.firstChild.classList.add('rotateBack');
+            event.target.parentNode.parentNode.lastChild.classList.add('rotateFront');
 
-    for(let key in cards){
-        if(event.target.closest('.card-main').getAttribute('href') === `#${key}`){
-            layout.innerHTML = ''
-            createCards(key);
+            event.target.parentNode.parentNode.addEventListener('mouseleave', ()=>{
+                event.target.parentNode.parentNode.firstChild.classList.remove('rotateBack');
+                event.target.parentNode.parentNode.lastChild.classList.remove('rotateFront');
+            })
        }
     }
 
     
-
-   
 })

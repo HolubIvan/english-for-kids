@@ -142,14 +142,14 @@ body {
   max-width: 100%;
 }
 .card__back__title {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
-.card:hover .card__front {
+.rotateBack {
   transform: rotateY(-180deg);
 }
 
-.card:hover .card__back {
+.rotateFront {
   transform: rotateY(0);
 }
 
