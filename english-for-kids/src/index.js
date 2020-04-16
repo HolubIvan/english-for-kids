@@ -12,6 +12,8 @@ window.addEventListener('load', ()=>{
     if(cards){
         renderCategoriesToDom();
     }
+
+
 })
 
 
@@ -78,32 +80,45 @@ layout.addEventListener('click', (event)=>{
             })
        }
 
-       if(event.target.closest('.card__front__title')){
+       //part to add audio file to card
+    if(event.target.closest('.card__front__title')){
 
             
-            const audio = new Audio(`./../assets/audio/${event.target.textContent}.mp3`);
+        const audio = new Audio(`./../assets/audio/${event.target.textContent}.mp3`);
             setTimeout(()=>{
                 audio.play()
-            }, 700)
+        }, 700)
        }
     }
 })
 
 
+//removed underline from navbar link function
+const removeUnderlineFromNavbarLink = ()=>{
+    document.querySelectorAll('.navbar__link').forEach((el)=>{
+        if(el.classList.contains('underline')){
+            el.classList.remove('underline')
+        }
+    })
+}
+
 
 
 //navbar handler for change category
 navBar.addEventListener('click', (event)=>{
-    console.log(event.target.getAttribute('href'));
     for(let key in cards){
         if(event.target.getAttribute('href') === `#${key}`){
             layout.innerHTML = ''
             createCards(key); 
             document.querySelector("#hamburger-checkbox").checked = false;
+            removeUnderlineFromNavbarLink();
+            event.target.classList.add('underline');
        }
        if(event.target.getAttribute('href') === '#MainPage'){
-           layout.innerHTML = '';
+            layout.innerHTML = '';
             createCategories(cards);
+            removeUnderlineFromNavbarLink();
+            event.target.classList.add('underline');
             document.querySelector("#hamburger-checkbox").checked = false;
        }
     }

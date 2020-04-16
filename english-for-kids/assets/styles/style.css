@@ -87,6 +87,10 @@ body {
   color: #7b7b7b;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 .card {
   width: 280px;
   height: 260px;
