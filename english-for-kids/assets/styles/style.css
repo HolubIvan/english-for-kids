@@ -117,6 +117,7 @@ body {
 }
 .card__front__title {
   font-size: 3rem;
+  cursor: pointer;
 }
 .card__front__arrows {
   width: 23px;

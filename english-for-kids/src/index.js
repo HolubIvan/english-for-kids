@@ -77,10 +77,18 @@ layout.addEventListener('click', (event)=>{
                 event.target.parentNode.parentNode.lastChild.classList.remove('rotateFront');
             })
        }
-    }
 
-    
+       if(event.target.closest('.card__front__title')){
+
+            
+            const audio = new Audio(`./../assets/audio/${event.target.textContent}.mp3`);
+            setTimeout(()=>{
+                audio.play()
+            }, 700)
+       }
+    }
 })
+
 
 
 
@@ -100,3 +108,4 @@ navBar.addEventListener('click', (event)=>{
        }
     }
 })
+
