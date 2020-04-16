@@ -59,15 +59,15 @@
         }
 
         &__title{
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
     }
 }
 
-// .card:hover .card__front{
-//     transform: rotateY(-180deg);
-// }
+.card:hover .card__front{
+    transform: rotateY(-180deg);
+}
 
-// .card:hover .card__back{
-//     transform: rotateY(0);
-// }
+.card:hover .card__back{
+    transform: rotateY(0);
+}

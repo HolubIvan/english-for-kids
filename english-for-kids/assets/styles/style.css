@@ -145,6 +145,14 @@ body {
   font-size: 3rem;
 }
 
+.card:hover .card__front {
+  transform: rotateY(-180deg);
+}
+
+.card:hover .card__back {
+  transform: rotateY(0);
+}
+
 .card-main {
   width: 280px;
   height: 260px;
