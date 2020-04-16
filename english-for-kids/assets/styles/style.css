@@ -14,13 +14,14 @@ html {
 }
 
 body {
-  overflow: hidden;
+  overflow: auto;
   color: #000;
 }
 
 .wrapper {
   max-width: 1300px;
   margin: 0 auto;
+  padding: 5px;
 }
 
 .header {

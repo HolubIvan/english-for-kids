@@ -15,11 +15,12 @@ html {
 }
 
 body{
-    overflow: hidden;
+    overflow: auto;
     color: $color-black;
 }
 
 .wrapper{
     max-width: 1300px;
     margin: 0 auto;
+    padding: 5px;
 }
