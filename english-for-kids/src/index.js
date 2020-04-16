@@ -3,8 +3,7 @@ import {Card} from './js/Card';
 
 //variables
 let layout = document.querySelector('.main');
-let categoryCard = document.querySelector('.card-main');
-let switcher = document.querySelector('.switch');
+let navBar = document.querySelector('.navbar');
 
 
 //Window listener
@@ -13,19 +12,10 @@ window.addEventListener('load', ()=>{
     if(cards){
         renderCategoriesToDom();
     }
-
-    // localStorage.setItem('isPlay', false)
 })
 
 
-//switch button listener
-// switcher.addEventListener('click', ()=>{
-//     changeGameStatus();
-    
-// })
-
-
-
+//render categories to DOM for the first time load page
 const renderCategoriesToDom = () => {
 
     layout.innerHTML = '';
@@ -61,17 +51,6 @@ const createCategories = (object) => {
 }
 
 
-//Game status changer from train to play
-// const changeGameStatus = ()=>{
-//     if(localStorage.getItem('isPlay' === false)){
-//         localStorage.setItem('isPlay', true)
-//     } else {
-//         localStorage.setItem('isPlay', false)
-//     }
-    
-// }
-
-
 
 // layout handler for changing categories to cards
 layout.addEventListener('click', (event)=>{
@@ -101,4 +80,23 @@ layout.addEventListener('click', (event)=>{
     }
 
     
+})
+
+
+
+//navbar handler for change category
+navBar.addEventListener('click', (event)=>{
+    console.log(event.target.getAttribute('href'));
+    for(let key in cards){
+        if(event.target.getAttribute('href') === `#${key}`){
+            layout.innerHTML = ''
+            createCards(key); 
+            document.querySelector("#hamburger-checkbox").checked = false;
+       }
+       if(event.target.getAttribute('href') === '#MainPage'){
+           layout.innerHTML = '';
+            createCategories(cards);
+            document.querySelector("#hamburger-checkbox").checked = false;
+       }
+    }
 })
