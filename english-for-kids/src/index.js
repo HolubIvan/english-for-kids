@@ -1,6 +1,6 @@
 import {cards} from './js/cards';
 import {Card} from './js/Card';
-import {layout, navBar, switchBar} from './js/constants'
+import {layout, navBar, switchBar, buttonStart, switchHeader} from './js/constants'
 
 
 //Window listener
@@ -10,8 +10,7 @@ window.addEventListener('load', ()=>{
         renderCategoriesToDom();
     }
 
-    //set base state to Train mode
-    localStorage.setItem('isPlay', false);
+    
 })
 
 
@@ -138,19 +137,127 @@ navBar.addEventListener('click', (event)=>{
     }
 })
 
-function checkStateMode (){
-    if(localStorage.getItem('isPlay') === 'false'){
-        localStorage.setItem('isPlay', true);
-        document.querySelector('.switch__header').textContent = 'Play';
-        document.querySelector('.button-start').style.display = 'block'
-    } else if (localStorage.getItem('isPlay') === 'true'){
-        localStorage.setItem('isPlay', false);
-        document.querySelector('.switch__header').textContent = 'Train';
-        document.querySelector('.button-start').style.display = 'none'
-    } 
-}
+
+
+
+let stateGamePlay = false;
 
 //switchBar handler to switch between Train/Play mode
 switchBar.addEventListener('click', ()=>{
-    checkStateMode();
+    if(stateGamePlay === false){
+        buttonStart.style.display = 'block';
+        switchHeader.textContent = 'Play';
+        stateGamePlay = true;
+        removeTitlesFromCards();
+        removeArrowsFromCards();
+        imageFitToAllDiv();
+        changeColorOfCategoryPlayState();
+        changeColorNavBarOnPlayMode();
+        changeColorSwitchBarOnPlayMode();
+    } else if (stateGamePlay === true){
+        buttonStart.style.display = 'none';
+        switchHeader.textContent = 'Train';
+        stateGamePlay = false;
+        imageCardInitialState();
+        titleCardInitialState();
+        arrowsCardInitialState();
+        changeColorOfCategoryTrainMode();
+        changeColorNavBarOnTrainMode();
+        changeColorSwitchBarOnTrainMode();
+    }
+})
+
+//function for switchBar to change cards to initial state
+const imageCardInitialState = ()=>{
+    let img = document.querySelectorAll('.card__front__img');
+    img.forEach((el)=>{
+        el.style.objectFit = '';
+        el.style.height = '';
+    })
+}
+
+
+//function for switchBar to change cards to initial state
+const titleCardInitialState = ()=>{
+    let title = document.querySelectorAll('.card__front__title');
+    title.forEach((el)=>{
+        el.style.display = 'block';
+    })
+}
+
+
+//function for switchBar to change cards to initial state
+const arrowsCardInitialState = ()=>{
+    let arrows = document.querySelectorAll('.card__front__arrows');
+    arrows.forEach((el)=>{
+        el.style.display = 'block';
+    })
+}
+
+
+//function for switchBar handler to remove titles from cards
+const removeTitlesFromCards = ()=>{
+   let titles = document.querySelectorAll('.card__front__title');
+   titles.forEach((el)=>{
+    el.style.display = 'none';
+   })
+}
+//function for switchBar handler to remove arrows from cards
+const removeArrowsFromCards = ()=>{
+    let arrows = document.querySelectorAll('.card__front__arrows');
+    arrows.forEach((el)=>{
+    el.style.display = 'none';
+    })
+}
+//function for switchBar handler to fit images for cards
+const imageFitToAllDiv = ()=>{
+    let img = document.querySelectorAll('.card__front__img');
+    img.forEach((el)=>{
+        el.style.objectFit = 'none';
+        el.style.height = '100%';
+    })
+}
+
+//function to change color of categories when play mode turn on
+const changeColorOfCategoryPlayState = ()=>{
+    const categories = document.querySelectorAll('.card-main');
+    categories.forEach((el)=>{
+        el.style.background = 'linear-gradient(rgba(235, 163, 227, .3), rgb(235, 163, 227))';
+    })
+}
+//function to change color of categories when play mode turn of
+const changeColorOfCategoryTrainMode = ()=>{
+    const categories = document.querySelectorAll('.card-main');
+    categories.forEach((el)=>{
+        el.style.background = 'linear-gradient(rgba(87, 154, 87, 0.3), #579a57)';
+    })
+}
+
+//function to change navbar background color when play mode turn on
+const changeColorNavBarOnPlayMode = ()=>{
+    navBar.style.backgroundColor = 'rgb(235, 163, 227)';
+}
+
+//function to change navbar background color when play mode turn of
+const changeColorNavBarOnTrainMode = ()=>{
+    navBar.style.backgroundColor = '#579a57';
+}
+
+//function to change navbar background color when play mode turn of
+const changeColorSwitchBarOnPlayMode = ()=>{
+    switchBar.style.backgroundColor = 'rgb(235, 163, 227)';
+
+}
+
+//function to change navbar background color when play mode turn of
+const changeColorSwitchBarOnTrainMode = ()=>{
+    switchBar.style.backgroundColor = '#579a57';
+}
+
+
+//button start handler
+buttonStart.addEventListener('click', ()=>{
+    if(stateGamePlay === true){
+        console.log('game started')
+    } 
 })
