@@ -1,9 +1,6 @@
 import {cards} from './js/cards';
 import {Card} from './js/Card';
-
-//variables
-let layout = document.querySelector('.main');
-let navBar = document.querySelector('.navbar');
+import {layout, navBar, switchBar} from './js/constants'
 
 
 //Window listener
@@ -13,7 +10,8 @@ window.addEventListener('load', ()=>{
         renderCategoriesToDom();
     }
 
-
+    //set base state to Train mode
+    localStorage.setItem('isPlay', false);
 })
 
 
@@ -59,6 +57,13 @@ layout.addEventListener('click', (event)=>{
 
     //part for main page when we change categories to cards
     if(event.target.closest('.card-main')){
+
+        //check if navbar is open(if open - close)
+        if(document.querySelector("#hamburger-checkbox").checked == true){
+            document.querySelector("#hamburger-checkbox").checked = false;
+        }
+
+        document.querySelector("#hamburger-checkbox").checked = false;
         for(let key in cards){
             if(event.target.closest('.card-main').getAttribute('href') === `#${key}`){
                 layout.innerHTML = ''
@@ -69,7 +74,12 @@ layout.addEventListener('click', (event)=>{
 
     //part for cards when we push for arrwos to change side of card
     if(event.target.closest('.card')){
-    
+        
+        //check if navbar is open(if open - close)
+        if(document.querySelector("#hamburger-checkbox").checked == true){
+            document.querySelector("#hamburger-checkbox").checked = false;
+        }
+
        if(event.target.className === 'card__front__arrows'){
             event.target.parentNode.parentNode.firstChild.classList.add('rotateBack');
             event.target.parentNode.parentNode.lastChild.classList.add('rotateFront');
@@ -83,11 +93,15 @@ layout.addEventListener('click', (event)=>{
        //part to add audio file to card
     if(event.target.closest('.card__front__title')){
 
-            
+        // ./../assets/audio/${event.target.textContent}.mp3
+        // /Users/golubidze13/Desktop/holubivan-RS2020Q1/english-for-kids/assets/audio/${event.target.textContent}.mp3
+
         const audio = new Audio(`./../assets/audio/${event.target.textContent}.mp3`);
             setTimeout(()=>{
                 audio.play()
         }, 700)
+        // document.querySelector('.audio__file').setAttribute('src', `./assets/audio/${event.target.textContent}.mp3`);
+        // document.querySelector('.audio').play();
        }
     }
 })
@@ -124,3 +138,19 @@ navBar.addEventListener('click', (event)=>{
     }
 })
 
+function checkStateMode (){
+    if(localStorage.getItem('isPlay') === 'false'){
+        localStorage.setItem('isPlay', true);
+        document.querySelector('.switch__header').textContent = 'Play';
+        document.querySelector('.button-start').style.display = 'block'
+    } else if (localStorage.getItem('isPlay') === 'true'){
+        localStorage.setItem('isPlay', false);
+        document.querySelector('.switch__header').textContent = 'Train';
+        document.querySelector('.button-start').style.display = 'none'
+    } 
+}
+
+//switchBar handler to switch between Train/Play mode
+switchBar.addEventListener('click', ()=>{
+    checkStateMode();
+})
