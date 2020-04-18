@@ -25,6 +25,14 @@ const renderCategoriesToDom = () => {
 const createCards = (key) => {
     cards[key].forEach((el)=>{
         layout.append(new Card(el).createCategory());
+
+        //if game state is true we transform cards for play mode
+        if(stateGamePlay === true){
+            buttonStart.style.display = 'block';
+            removeTitlesFromCards();
+            removeArrowsFromCards();
+            imageFitToAllDiv();
+        }
     }) 
 }
 
@@ -44,6 +52,12 @@ const createCategories = (object) => {
         node.append(img);
         node.append(title);
         layout.append(node);
+        
+        //check if state is play - make play state of categories and delete a button 'start game'
+        if(stateGamePlay === true){
+            changeColorOfCategoryPlayState();
+            buttonStart.style.display = 'none';
+        }
     }
     //add underline to main page in navbar
     document.querySelector("body > div > header > div.hamburger > nav > ul > li:nth-child(1) > a").classList.add('underline');
@@ -141,7 +155,6 @@ let stateGamePlay = false;
 // switchBar handler to switch between Train/Play mode
 switchBar.addEventListener('click', ()=>{
     if(stateGamePlay === false){
-        buttonStart.style.display = 'block';
         switchHeader.textContent = 'Play';
         stateGamePlay = true;
         removeTitlesFromCards();
