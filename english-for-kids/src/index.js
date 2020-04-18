@@ -24,7 +24,7 @@ const renderCategoriesToDom = () => {
 //Create cards function
 const createCards = (key) => {
     cards[key].forEach((el)=>{
-        layout.append(new Card(el).createCategory())
+        layout.append(new Card(el).createCategory());
     }) 
 }
 
@@ -45,6 +45,8 @@ const createCategories = (object) => {
         node.append(title);
         layout.append(node);
     }
+    //add underline to main page in navbar
+    document.querySelector("body > div > header > div.hamburger > nav > ul > li:nth-child(1) > a").classList.add('underline');
 }
 
 
@@ -61,10 +63,23 @@ layout.addEventListener('click', (event)=>{
         }
 
         document.querySelector("#hamburger-checkbox").checked = false;
+
+        //watching what category was clicked, get attribute and look for this ket in obj and create cards
         for(let key in cards){
             if(event.target.closest('.card-main').getAttribute('href') === `#${key}`){
                 layout.innerHTML = ''
                 createCards(key); 
+
+                //make new this
+                let newKey = key;
+                //add underline to navbar for current category
+                document.querySelectorAll('.navbar__link').forEach((el)=>{
+                    if(el.getAttribute('href') === `#${newKey}`){
+                        el.classList.add('underline')
+                    }
+                })
+                //delete underline from main page in navbar
+                document.querySelector("body > div > header > div.hamburger > nav > ul > li:nth-child(1) > a").classList.remove('underline');
            }
         }
     }
@@ -90,10 +105,7 @@ layout.addEventListener('click', (event)=>{
        //part to add audio file to card
     if(event.target.closest('.card__front__title')){
 
-        // ./../assets/audio/${event.target.textContent}.mp3
-        // /Users/golubidze13/Desktop/holubivan-RS2020Q1/english-for-kids/assets/audio/${event.target.textContent}.mp3
-
-        const audio = new Audio(`./../assets/audio/${event.target.textContent}.mp3`);
+        const audio = new Audio(`./assets/audio/${event.target.textContent}.mp3`);
         setTimeout(()=>{
             audio.play()
         }, 700)
@@ -126,7 +138,7 @@ navBar.addEventListener('click', (event)=>{
 
 let stateGamePlay = false;
 
-//switchBar handler to switch between Train/Play mode
+// switchBar handler to switch between Train/Play mode
 switchBar.addEventListener('click', ()=>{
     if(stateGamePlay === false){
         buttonStart.style.display = 'block';
@@ -174,7 +186,7 @@ buttonStart.addEventListener('click', ()=>{
          
         //make an array of audios
         for(let i = 0; i < arrOfWords.length; i++){
-            arrOfAudios.push(new Audio(`./../assets/audio/${arrOfWords[i]}.mp3`))
+            arrOfAudios.push(new Audio(`./assets/audio/${arrOfWords[i]}.mp3`))
         }
 
 

@@ -1,6 +1,6 @@
 import {layout, navBar,switchBar, buttonStart, switchHeader,rating} from './constants'
 
-export {imageCardInitialState, titleCardInitialState, arrowsCardInitialState, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorOfCategoryTrainMode, changeColorNavBarOnPlayMode, changeColorNavBarOnTrainMode, changeColorSwitchBarOnPlayMode, changeColorSwitchBarOnTrainMode, removeUnderlineFromNavbarLink}
+export { imageCardInitialState, changeColorNavBarOnTrainMode, changeColorSwitchBarOnTrainMode, titleCardInitialState, arrowsCardInitialState, changeColorOfCategoryTrainMode, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorNavBarOnPlayMode, changeColorSwitchBarOnPlayMode, removeUnderlineFromNavbarLink}
 
 
 
@@ -31,6 +31,23 @@ const arrowsCardInitialState = ()=>{
     })
 }
 
+    //function to change color of categories when play mode turn of
+const changeColorOfCategoryTrainMode = ()=>{
+    const categories = document.querySelectorAll('.card-main');
+    categories.forEach((el)=>{
+        el.style.background = 'linear-gradient(rgba(87, 154, 87, 0.3), #579a57)';
+    })
+}
+
+//function to change navbar background color when play mode turn of
+const changeColorNavBarOnTrainMode = ()=>{
+    navBar.style.backgroundColor = '#579a57';
+}
+
+//function to change navbar background color when play mode turn of
+const changeColorSwitchBarOnTrainMode = ()=>{
+    switchBar.style.backgroundColor = '#579a57';
+}
 
 //function for switchBar handler to remove titles from cards
 const removeTitlesFromCards = ()=>{
@@ -62,22 +79,10 @@ const changeColorOfCategoryPlayState = ()=>{
         el.style.background = 'linear-gradient(rgba(235, 163, 227, .3), rgb(235, 163, 227))';
     })
 }
-//function to change color of categories when play mode turn of
-const changeColorOfCategoryTrainMode = ()=>{
-    const categories = document.querySelectorAll('.card-main');
-    categories.forEach((el)=>{
-        el.style.background = 'linear-gradient(rgba(87, 154, 87, 0.3), #579a57)';
-    })
-}
 
 //function to change navbar background color when play mode turn on
 const changeColorNavBarOnPlayMode = ()=>{
     navBar.style.backgroundColor = 'rgb(235, 163, 227)';
-}
-
-//function to change navbar background color when play mode turn of
-const changeColorNavBarOnTrainMode = ()=>{
-    navBar.style.backgroundColor = '#579a57';
 }
 
 //function to change navbar background color when play mode turn of
@@ -86,10 +91,7 @@ const changeColorSwitchBarOnPlayMode = ()=>{
 
 }
 
-//function to change navbar background color when play mode turn of
-const changeColorSwitchBarOnTrainMode = ()=>{
-    switchBar.style.backgroundColor = '#579a57';
-}
+
 
 
 //removed underline from navbar link function
