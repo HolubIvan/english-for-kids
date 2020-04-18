@@ -1,6 +1,6 @@
 import {layout, navBar,switchBar, buttonStart, switchHeader,rating} from './constants'
 
-export { imageCardInitialState, changeColorNavBarOnTrainMode, changeColorSwitchBarOnTrainMode, titleCardInitialState, arrowsCardInitialState, changeColorOfCategoryTrainMode, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorNavBarOnPlayMode, changeColorSwitchBarOnPlayMode, removeUnderlineFromNavbarLink}
+export { imageCardInitialState, changeColorNavBarOnTrainMode, changeColorSwitchBarOnTrainMode, titleCardInitialState, arrowsCardInitialState, changeColorOfCategoryTrainMode, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorNavBarOnPlayMode, changeColorSwitchBarOnPlayMode, removeUnderlineFromNavbarLink, changeTypeButtonStatePlay}
 
 
 
@@ -101,4 +101,9 @@ const removeUnderlineFromNavbarLink = ()=>{
             el.classList.remove('underline')
         }
     })
+}
+
+const changeTypeButtonStatePlay = ()=>{
+    buttonStart.setAttribute('value', '')
+    
 }

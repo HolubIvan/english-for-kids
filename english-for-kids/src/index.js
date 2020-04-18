@@ -1,7 +1,7 @@
 import {cards} from './js/cards';
 import {Card} from './js/Card';
 import {layout, navBar, switchBar, buttonStart, switchHeader} from './js/constants';
-import {imageCardInitialState, titleCardInitialState, arrowsCardInitialState, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorOfCategoryTrainMode, changeColorNavBarOnPlayMode, changeColorNavBarOnTrainMode, changeColorSwitchBarOnPlayMode, changeColorSwitchBarOnTrainMode, removeUnderlineFromNavbarLink} from './js/stateFunctions';
+import {imageCardInitialState, titleCardInitialState, arrowsCardInitialState, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorOfCategoryTrainMode, changeColorNavBarOnPlayMode, changeColorNavBarOnTrainMode, changeColorSwitchBarOnPlayMode, changeColorSwitchBarOnTrainMode, removeUnderlineFromNavbarLink, changeTypeButtonStatePlay} from './js/stateFunctions';
 import {addStarWin, addStarWrong} from './js/ratingFunctions';
 
 
@@ -134,9 +134,14 @@ navBar.addEventListener('click', (event)=>{
         if(event.target.getAttribute('href') === `#${key}`){
             layout.innerHTML = ''
             createCards(key); 
+            //hide navbar if navbar link clicked
             document.querySelector("#hamburger-checkbox").checked = false;
             removeUnderlineFromNavbarLink();
             event.target.classList.add('underline');
+            //check if play mode is on - make a button visible when clicking navbar
+            if(stateGamePlay === true){
+                buttonStart.style.display = 'block';
+            }
        }
        if(event.target.getAttribute('href') === '#MainPage'){
             layout.innerHTML = '';
@@ -155,6 +160,7 @@ let stateGamePlay = false;
 // switchBar handler to switch between Train/Play mode
 switchBar.addEventListener('click', ()=>{
     if(stateGamePlay === false){
+        buttonStart.style.display = 'block';
         switchHeader.textContent = 'Play';
         stateGamePlay = true;
         removeTitlesFromCards();
@@ -163,6 +169,9 @@ switchBar.addEventListener('click', ()=>{
         changeColorOfCategoryPlayState();
         changeColorNavBarOnPlayMode();
         changeColorSwitchBarOnPlayMode();
+        if(layout.firstChild.className === 'card-main'){
+            buttonStart.style.display = 'none';
+        }
     } else if (stateGamePlay === true){
         buttonStart.style.display = 'none';
         switchHeader.textContent = 'Train';
@@ -181,6 +190,8 @@ switchBar.addEventListener('click', ()=>{
 buttonStart.addEventListener('click', ()=>{
 
     if(stateGamePlay === true){
+
+        changeTypeButtonStatePlay();
 
         //arr of words at category
         let arrOfWords = [];

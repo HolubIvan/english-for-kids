@@ -304,7 +304,15 @@ body {
 }
 
 .hamburger__checkbox:checked ~ span {
-  margin-top: 2px;
+  transform: rotate(45deg) translate(9px, 9px);
+}
+
+.hamburger__checkbox:checked ~ span:nth-last-child(3) {
+  transform: rotate(-45deg);
+}
+
+.hamburger__checkbox:checked ~ span:nth-last-child(2) {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */
