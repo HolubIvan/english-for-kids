@@ -1,16 +1,15 @@
 import {cards} from './js/cards';
 import {Card} from './js/Card';
-import {layout, navBar, switchBar, buttonStart, switchHeader} from './js/constants'
+import {layout, navBar, switchBar, buttonStart, switchHeader} from './js/constants';
+import {imageCardInitialState, titleCardInitialState, arrowsCardInitialState, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorOfCategoryTrainMode, changeColorNavBarOnPlayMode, changeColorNavBarOnTrainMode, changeColorSwitchBarOnPlayMode, changeColorSwitchBarOnTrainMode, removeUnderlineFromNavbarLink} from './js/stateFunctions';
+import {addStarWin, addStarWrong} from './js/ratingFunctions';
 
 
 //Window listener
 window.addEventListener('load', ()=>{
-
     if(cards){
         renderCategoriesToDom();
     }
-
-    
 })
 
 
@@ -18,7 +17,6 @@ window.addEventListener('load', ()=>{
 const renderCategoriesToDom = () => {
 
     layout.innerHTML = '';
-
     createCategories(cards);
 }
 
@@ -96,25 +94,12 @@ layout.addEventListener('click', (event)=>{
         // /Users/golubidze13/Desktop/holubivan-RS2020Q1/english-for-kids/assets/audio/${event.target.textContent}.mp3
 
         const audio = new Audio(`./../assets/audio/${event.target.textContent}.mp3`);
-            setTimeout(()=>{
-                audio.play()
+        setTimeout(()=>{
+            audio.play()
         }, 700)
-        // document.querySelector('.audio__file').setAttribute('src', `./assets/audio/${event.target.textContent}.mp3`);
-        // document.querySelector('.audio').play();
        }
     }
 })
-
-
-//removed underline from navbar link function
-const removeUnderlineFromNavbarLink = ()=>{
-    document.querySelectorAll('.navbar__link').forEach((el)=>{
-        if(el.classList.contains('underline')){
-            el.classList.remove('underline')
-        }
-    })
-}
-
 
 
 //navbar handler for change category
@@ -136,7 +121,6 @@ navBar.addEventListener('click', (event)=>{
        }
     }
 })
-
 
 
 
@@ -167,97 +151,43 @@ switchBar.addEventListener('click', ()=>{
     }
 })
 
-//function for switchBar to change cards to initial state
-const imageCardInitialState = ()=>{
-    let img = document.querySelectorAll('.card__front__img');
-    img.forEach((el)=>{
-        el.style.objectFit = '';
-        el.style.height = '';
-    })
-}
-
-
-//function for switchBar to change cards to initial state
-const titleCardInitialState = ()=>{
-    let title = document.querySelectorAll('.card__front__title');
-    title.forEach((el)=>{
-        el.style.display = 'block';
-    })
-}
-
-
-//function for switchBar to change cards to initial state
-const arrowsCardInitialState = ()=>{
-    let arrows = document.querySelectorAll('.card__front__arrows');
-    arrows.forEach((el)=>{
-        el.style.display = 'block';
-    })
-}
-
-
-//function for switchBar handler to remove titles from cards
-const removeTitlesFromCards = ()=>{
-   let titles = document.querySelectorAll('.card__front__title');
-   titles.forEach((el)=>{
-    el.style.display = 'none';
-   })
-}
-//function for switchBar handler to remove arrows from cards
-const removeArrowsFromCards = ()=>{
-    let arrows = document.querySelectorAll('.card__front__arrows');
-    arrows.forEach((el)=>{
-    el.style.display = 'none';
-    })
-}
-//function for switchBar handler to fit images for cards
-const imageFitToAllDiv = ()=>{
-    let img = document.querySelectorAll('.card__front__img');
-    img.forEach((el)=>{
-        el.style.objectFit = 'none';
-        el.style.height = '100%';
-    })
-}
-
-//function to change color of categories when play mode turn on
-const changeColorOfCategoryPlayState = ()=>{
-    const categories = document.querySelectorAll('.card-main');
-    categories.forEach((el)=>{
-        el.style.background = 'linear-gradient(rgba(235, 163, 227, .3), rgb(235, 163, 227))';
-    })
-}
-//function to change color of categories when play mode turn of
-const changeColorOfCategoryTrainMode = ()=>{
-    const categories = document.querySelectorAll('.card-main');
-    categories.forEach((el)=>{
-        el.style.background = 'linear-gradient(rgba(87, 154, 87, 0.3), #579a57)';
-    })
-}
-
-//function to change navbar background color when play mode turn on
-const changeColorNavBarOnPlayMode = ()=>{
-    navBar.style.backgroundColor = 'rgb(235, 163, 227)';
-}
-
-//function to change navbar background color when play mode turn of
-const changeColorNavBarOnTrainMode = ()=>{
-    navBar.style.backgroundColor = '#579a57';
-}
-
-//function to change navbar background color when play mode turn of
-const changeColorSwitchBarOnPlayMode = ()=>{
-    switchBar.style.backgroundColor = 'rgb(235, 163, 227)';
-
-}
-
-//function to change navbar background color when play mode turn of
-const changeColorSwitchBarOnTrainMode = ()=>{
-    switchBar.style.backgroundColor = '#579a57';
-}
-
 
 //button start handler
 buttonStart.addEventListener('click', ()=>{
+
     if(stateGamePlay === true){
-        console.log('game started')
+
+        //arr of words at category
+        let arrOfWords = [];
+        let arrOfAudios = [];
+
+        //get all words from category
+        let words = document.querySelectorAll('.card__front__title');
+        words.forEach((el)=>{
+            arrOfWords.push(el.textContent);
+        });
+
+        arrOfWords.sort(function(){
+            return 0.5 - Math.random();
+        })
+        
+         
+        //make an array of audios
+        for(let i = 0; i < arrOfWords.length; i++){
+            arrOfAudios.push(new Audio(`./../assets/audio/${arrOfWords[i]}.mp3`))
+        }
+
+
+        arrOfAudios[arrOfAudios.length-1].play();
+    
+        layout.addEventListener('click', (e)=>{
+            if(arrOfAudios[arrOfAudios.length-1].src.includes(e.target.nextElementSibling.textContent)){
+                arrOfAudios.pop(arrOfAudios[arrOfAudios.length-1]);
+                addStarWin();
+            } else {
+                addStarWrong();
+            }
+        })
+        
     } 
 })
