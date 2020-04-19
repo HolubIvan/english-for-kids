@@ -1,7 +1,7 @@
 import {cards} from './js/cards';
 import {Card} from './js/Card';
 import {layout, navBar, switchBar, buttonStart, switchHeader} from './js/constants';
-import {imageCardInitialState, titleCardInitialState, arrowsCardInitialState, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorOfCategoryTrainMode, changeColorNavBarOnPlayMode, changeColorNavBarOnTrainMode, changeColorSwitchBarOnPlayMode, changeColorSwitchBarOnTrainMode, removeUnderlineFromNavbarLink, changeTypeButtonStatePlay} from './js/stateFunctions';
+import {imageCardInitialState, titleCardInitialState, arrowsCardInitialState, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorOfCategoryTrainMode, changeColorNavBarOnPlayMode, changeColorNavBarOnTrainMode, changeColorSwitchBarOnPlayMode, changeColorSwitchBarOnTrainMode, removeUnderlineFromNavbarLink, changeTypeButtonStatePlay, changeTypeButtonStateReset} from './js/stateFunctions';
 import {addStarWin, addStarWrong} from './js/ratingFunctions';
 
 
@@ -182,6 +182,7 @@ switchBar.addEventListener('click', ()=>{
         changeColorOfCategoryTrainMode();
         changeColorNavBarOnTrainMode();
         changeColorSwitchBarOnTrainMode();
+        changeTypeButtonStateReset();
     }
 })
 

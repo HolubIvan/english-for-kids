@@ -1,6 +1,6 @@
 import {layout, navBar,switchBar, buttonStart, switchHeader,rating} from './constants'
 
-export { imageCardInitialState, changeColorNavBarOnTrainMode, changeColorSwitchBarOnTrainMode, titleCardInitialState, arrowsCardInitialState, changeColorOfCategoryTrainMode, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorNavBarOnPlayMode, changeColorSwitchBarOnPlayMode, removeUnderlineFromNavbarLink, changeTypeButtonStatePlay}
+export { imageCardInitialState, changeColorNavBarOnTrainMode, changeColorSwitchBarOnTrainMode, titleCardInitialState, arrowsCardInitialState, changeColorOfCategoryTrainMode, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorNavBarOnPlayMode, changeColorSwitchBarOnPlayMode, removeUnderlineFromNavbarLink, changeTypeButtonStatePlay, changeTypeButtonStateReset}
 
 
 
@@ -103,7 +103,20 @@ const removeUnderlineFromNavbarLink = ()=>{
     })
 }
 
+//make repeat button from start game button
 const changeTypeButtonStatePlay = ()=>{
-    buttonStart.setAttribute('value', '')
-    
+    buttonStart.setAttribute('value', '');
+    buttonStart.style.backgroundImage = 'url(./assets/img/repeat.svg)';
+    buttonStart.style.backgroundRepeat = 'no-repeat';
+    buttonStart.style.backgroundSize = '30px';
+    buttonStart.style.backgroundPosition = 'center'
+}
+
+//reset button to start game state
+const changeTypeButtonStateReset = ()=>{
+    buttonStart.setAttribute('value', 'Start Game');
+    buttonStart.style.backgroundImage = '';
+    buttonStart.style.backgroundRepeat = '';
+    buttonStart.style.backgroundSize = '';
+    buttonStart.style.backgroundPosition = ''
 }

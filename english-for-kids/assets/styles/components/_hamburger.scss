@@ -35,7 +35,7 @@
 }
 
 .hamburger__checkbox:checked ~ span{
-    transform: rotate(45deg) translate(9px, 9px);
+    transform: rotate(45deg) translate(9px, 8px);
 }
 
 .hamburger__checkbox:checked ~span:nth-last-child(3){
