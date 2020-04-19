@@ -1,6 +1,6 @@
 import {layout, navBar,switchBar, buttonStart, switchHeader,rating} from './constants'
 
-export { imageCardInitialState, changeColorNavBarOnTrainMode, changeColorSwitchBarOnTrainMode, titleCardInitialState, arrowsCardInitialState, changeColorOfCategoryTrainMode, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorNavBarOnPlayMode, changeColorSwitchBarOnPlayMode, removeUnderlineFromNavbarLink, changeTypeButtonStatePlay, changeTypeButtonStateReset}
+export { imageCardInitialState, changeColorNavBarOnTrainMode, changeColorSwitchBarOnTrainMode, titleCardInitialState, arrowsCardInitialState, changeColorOfCategoryTrainMode, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorNavBarOnPlayMode, changeColorSwitchBarOnPlayMode, removeUnderlineFromNavbarLink, changeTypeButtonStatePlay, changeTypeButtonStateReset, resetOpacityToTrainMode}
 
 
 
@@ -119,4 +119,10 @@ const changeTypeButtonStateReset = ()=>{
     buttonStart.style.backgroundRepeat = '';
     buttonStart.style.backgroundSize = '';
     buttonStart.style.backgroundPosition = ''
+}
+
+const resetOpacityToTrainMode = () =>{
+    document.querySelectorAll('.card__front__img').forEach((el)=>{
+        el.style.opacity = '1'
+    })
 }

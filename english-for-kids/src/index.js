@@ -1,8 +1,8 @@
 import {cards} from './js/cards';
 import {Card} from './js/Card';
-import {layout, navBar, switchBar, buttonStart, switchHeader} from './js/constants';
-import {imageCardInitialState, titleCardInitialState, arrowsCardInitialState, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorOfCategoryTrainMode, changeColorNavBarOnPlayMode, changeColorNavBarOnTrainMode, changeColorSwitchBarOnPlayMode, changeColorSwitchBarOnTrainMode, removeUnderlineFromNavbarLink, changeTypeButtonStatePlay, changeTypeButtonStateReset} from './js/stateFunctions';
-import {addStarWin, addStarWrong} from './js/ratingFunctions';
+import {layout, navBar, switchBar, buttonStart, switchHeader, ratingDiv} from './js/constants';
+import {imageCardInitialState, titleCardInitialState, arrowsCardInitialState, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorOfCategoryTrainMode, changeColorNavBarOnPlayMode, changeColorNavBarOnTrainMode, changeColorSwitchBarOnPlayMode, changeColorSwitchBarOnTrainMode, removeUnderlineFromNavbarLink, changeTypeButtonStatePlay, changeTypeButtonStateReset, resetOpacityToTrainMode} from './js/stateFunctions';
+import {addStarWin, addStarWrong, finalResultFunction} from './js/ratingFunctions';
 
 
 //Window listener
@@ -183,6 +183,8 @@ switchBar.addEventListener('click', ()=>{
         changeColorNavBarOnTrainMode();
         changeColorSwitchBarOnTrainMode();
         changeTypeButtonStateReset();
+        ratingDiv.innerHTML = '';
+        resetOpacityToTrainMode();
     }
 })
 
@@ -233,13 +235,34 @@ buttonStart.addEventListener('click', (event)=>{
 
             layout.addEventListener('click', (e)=>{
                 if(e.target.style.opacity == '0.5'){
-                    console.log('opacity')
+                    return false;
                 } else {
-                    if(arrOfAudios[arrOfAudios.length-1].src.includes(e.target.nextElementSibling.textContent)){
+                    if(arrOfAudios[arrOfAudios.length-1].src.includes(e.target.nextElementSibling.textContent) && e.target.className === 'card__front__img'){
                         e.target.style.opacity = '0.5';
                         arrOfAudios.pop(arrOfAudios[arrOfAudios.length-1]);
                         addStarWin();
-                        play();
+                        if(!!arrOfAudios.length){
+                            play();
+                        } else {
+
+                            setTimeout(() => {
+                                const audio = new Audio(`./assets/audio/success.mp3`);
+                                audio.play();
+                                finalResultFunction();
+                                ratingDiv.innerHTML = '';
+                                stateGamePlay = false;
+                                buttonStart.style.display = 'none';
+                                changeColorSwitchBarOnTrainMode();
+                                document.querySelector('#switch-checkbox').checked = false;
+                                switchHeader.textContent = 'Train';
+                                changeColorNavBarOnTrainMode();
+
+                                setTimeout(() => {
+                                    renderCategoriesToDom();
+                                }, 2000);
+
+                            }, 1000);
+                        }
                     } else {
                         addStarWrong();
                     }
