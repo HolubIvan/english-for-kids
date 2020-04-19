@@ -5,10 +5,7 @@
     transform: translate(-50%, -50%); 
     
     &__title{
-        position: fixed;
-        top: 10%;
-        left: 40%;
-        transform: translate(-10%, -50%);
+        text-align: center;
         font-size: 5rem;
     }
 }

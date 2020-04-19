@@ -105,7 +105,6 @@ const removeUnderlineFromNavbarLink = ()=>{
 
 //make repeat button from start game button
 const changeTypeButtonStatePlay = ()=>{
-    // buttonStart.setAttribute('value', '');
     buttonStart.style.backgroundImage = 'url(./assets/img/repeat.svg)';
     buttonStart.style.backgroundRepeat = 'no-repeat';
     buttonStart.style.backgroundSize = '30px';
@@ -121,6 +120,7 @@ const changeTypeButtonStateReset = ()=>{
     buttonStart.style.backgroundPosition = ''
 }
 
+//reset opacity function
 const resetOpacityToTrainMode = () =>{
     document.querySelectorAll('.card__front__img').forEach((el)=>{
         el.style.opacity = '1'

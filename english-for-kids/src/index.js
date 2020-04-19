@@ -2,7 +2,7 @@ import {cards} from './js/cards';
 import {Card} from './js/Card';
 import {layout, navBar, switchBar, buttonStart, switchHeader, ratingDiv} from './js/constants';
 import {imageCardInitialState, titleCardInitialState, arrowsCardInitialState, removeTitlesFromCards, removeArrowsFromCards, imageFitToAllDiv, changeColorOfCategoryPlayState, changeColorOfCategoryTrainMode, changeColorNavBarOnPlayMode, changeColorNavBarOnTrainMode, changeColorSwitchBarOnPlayMode, changeColorSwitchBarOnTrainMode, removeUnderlineFromNavbarLink, changeTypeButtonStatePlay, changeTypeButtonStateReset, resetOpacityToTrainMode} from './js/stateFunctions';
-import {addStarWin, addStarWrong, finalResultFunction} from './js/ratingFunctions';
+import {addStarWin, addStarWrong, finalResultSuccessFunction, finalResultFailureFunction} from './js/ratingFunctions';
 
 
 //Window listener
@@ -185,6 +185,8 @@ switchBar.addEventListener('click', ()=>{
         changeTypeButtonStateReset();
         ratingDiv.innerHTML = '';
         resetOpacityToTrainMode();
+        arrOfWords.length = 0;
+        arrOfAudios.length = 0;
     }
 })
 
@@ -200,9 +202,10 @@ let arrOfAudios = [];
 //button start handler
 buttonStart.addEventListener('click', (event)=>{
 
+    //check if state of game is true
     if(stateGamePlay === true){
 
-
+        //check if a game hasn't started and this is first click
         if(buttonStart.getAttribute('value') === 'Start Game'){
 
             //change state of button
@@ -224,7 +227,8 @@ buttonStart.addEventListener('click', (event)=>{
             for(let i = 0; i < arrOfWords.length; i++){
                 arrOfAudios.push(new Audio(`./assets/audio/${arrOfWords[i]}.mp3`))
             }
-            
+
+            // first time word play after first click
             function play(){
                 setTimeout(()=>{
                     arrOfAudios[arrOfAudios.length-1].play();
@@ -232,36 +236,73 @@ buttonStart.addEventListener('click', (event)=>{
             }
             play();
             
-
+            //layout handler for waiting click on cards
             layout.addEventListener('click', (e)=>{
+                //if cards was clicked - they are inactive
                 if(e.target.style.opacity == '0.5'){
                     return false;
                 } else {
+                    //check if certain card is the same as word played audio
                     if(arrOfAudios[arrOfAudios.length-1].src.includes(e.target.nextElementSibling.textContent) && e.target.className === 'card__front__img'){
                         e.target.style.opacity = '0.5';
                         arrOfAudios.pop(arrOfAudios[arrOfAudios.length-1]);
                         addStarWin();
+                        //if an array not empty - play next word
                         if(!!arrOfAudios.length){
                             play();
                         } else {
-
-                            setTimeout(() => {
-                                const audio = new Audio(`./assets/audio/success.mp3`);
-                                audio.play();
-                                finalResultFunction();
-                                ratingDiv.innerHTML = '';
-                                stateGamePlay = false;
-                                buttonStart.style.display = 'none';
-                                changeColorSwitchBarOnTrainMode();
-                                document.querySelector('#switch-checkbox').checked = false;
-                                switchHeader.textContent = 'Train';
-                                changeColorNavBarOnTrainMode();
+                            //if an array is empty and all answers were correct
+                            if(ratingDiv.children.length == '8'){
 
                                 setTimeout(() => {
-                                    renderCategoriesToDom();
-                                }, 2000);
-
-                            }, 1000);
+                                    //play success song and make an initial state of app
+                                    const audio = new Audio(`./assets/audio/success.mp3`);
+                                    audio.play();
+                                    finalResultSuccessFunction();
+                                    ratingDiv.innerHTML = '';
+                                    stateGamePlay = false;
+                                    changeTypeButtonStateReset();
+                                    buttonStart.style.display = 'none';
+                                    changeColorSwitchBarOnTrainMode();
+                                    document.querySelector('#switch-checkbox').checked = false;
+                                    switchHeader.textContent = 'Train';
+                                    changeColorNavBarOnTrainMode();
+                                    removeUnderlineFromNavbarLink();
+                                    arrOfWords.length = 0;
+                                    arrOfAudios.length = 0;
+    
+                                    setTimeout(() => {
+                                        renderCategoriesToDom();
+                                    }, 2000);
+        
+                                }, 1000);
+                            
+                            } else {
+                                //if an array is empty but there were mistakes
+                                setTimeout(() => {
+                                    //play failure song and make an initial state of app
+                                    const audio = new Audio(`./assets/audio/failure.mp3`);
+                                    audio.play();
+                                    finalResultFailureFunction(ratingDiv.children.length - 8);
+                                    ratingDiv.innerHTML = '';
+                                    stateGamePlay = false;
+                                    changeTypeButtonStateReset();
+                                    buttonStart.style.display = 'none';
+                                    changeColorSwitchBarOnTrainMode();
+                                    document.querySelector('#switch-checkbox').checked = false;
+                                    switchHeader.textContent = 'Train';
+                                    changeColorNavBarOnTrainMode();
+                                    removeUnderlineFromNavbarLink();
+                                    arrOfWords.length = 0;
+                                    arrOfAudios.length = 0;
+    
+                                    setTimeout(() => {
+                                        renderCategoriesToDom();
+                                    }, 2000);
+        
+                                }, 1000);
+                                
+                            }
                         }
                     } else {
                         addStarWrong();
@@ -269,13 +310,13 @@ buttonStart.addEventListener('click', (event)=>{
                 }
 
             })
-
+        //check the value of button and if it was already clicked repeated click will make last word play again
         } else if(buttonStart.getAttribute('value') === ''){
             setTimeout(()=>{
                 arrOfAudios[arrOfAudios.length-1].play();
             }, 1000);
         }
-        
+        //set the value of button to empty after first click
         buttonStart.setAttribute('value', '');
         
         
