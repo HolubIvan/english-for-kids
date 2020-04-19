@@ -187,44 +187,74 @@ switchBar.addEventListener('click', ()=>{
 })
 
 
+
+
+
+
+//arr of words at category
+let arrOfWords = [];
+let arrOfAudios = [];
+
 //button start handler
-buttonStart.addEventListener('click', ()=>{
+buttonStart.addEventListener('click', (event)=>{
 
     if(stateGamePlay === true){
 
-        changeTypeButtonStatePlay();
 
-        //arr of words at category
-        let arrOfWords = [];
-        let arrOfAudios = [];
+        if(buttonStart.getAttribute('value') === 'Start Game'){
 
-        //get all words from category
-        let words = document.querySelectorAll('.card__front__title');
-        words.forEach((el)=>{
-            arrOfWords.push(el.textContent);
-        });
+            //change state of button
+            changeTypeButtonStatePlay();
 
-        arrOfWords.sort(function(){
-            return 0.5 - Math.random();
-        })
-        
-         
-        //make an array of audios
-        for(let i = 0; i < arrOfWords.length; i++){
-            arrOfAudios.push(new Audio(`./assets/audio/${arrOfWords[i]}.mp3`))
-        }
+            //get all words from category
+            let words = document.querySelectorAll('.card__front__title');
+            words.forEach((el)=>{
+                arrOfWords.push(el.textContent);
+            });
 
-
-        arrOfAudios[arrOfAudios.length-1].play();
-    
-        layout.addEventListener('click', (e)=>{
-            if(arrOfAudios[arrOfAudios.length-1].src.includes(e.target.nextElementSibling.textContent)){
-                arrOfAudios.pop(arrOfAudios[arrOfAudios.length-1]);
-                addStarWin();
-            } else {
-                addStarWrong();
+            //sort an array of audios
+            arrOfWords.sort(function(){
+                return 0.5 - Math.random();
+            })
+            
+            
+            //make an array of audios
+            for(let i = 0; i < arrOfWords.length; i++){
+                arrOfAudios.push(new Audio(`./assets/audio/${arrOfWords[i]}.mp3`))
             }
-        })
+            
+            function play(){
+                setTimeout(()=>{
+                    arrOfAudios[arrOfAudios.length-1].play();
+                }, 1000);
+            }
+            play();
+            
+
+            layout.addEventListener('click', (e)=>{
+                if(e.target.style.opacity == '0.5'){
+                    console.log('opacity')
+                } else {
+                    if(arrOfAudios[arrOfAudios.length-1].src.includes(e.target.nextElementSibling.textContent)){
+                        e.target.style.opacity = '0.5';
+                        arrOfAudios.pop(arrOfAudios[arrOfAudios.length-1]);
+                        addStarWin();
+                        play();
+                    } else {
+                        addStarWrong();
+                    }
+                }
+
+            })
+
+        } else if(buttonStart.getAttribute('value') === ''){
+            setTimeout(()=>{
+                arrOfAudios[arrOfAudios.length-1].play();
+            }, 1000);
+        }
+        
+        buttonStart.setAttribute('value', '');
+        
         
     } 
 })

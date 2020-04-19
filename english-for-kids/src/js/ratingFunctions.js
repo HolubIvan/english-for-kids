@@ -7,9 +7,8 @@ const addStarWin = () => {
     img.classList.add('star');
     img.setAttribute('src', './assets/img/star-win.svg');
     img.setAttribute('alt', 'star');
-    rating.append(img);
+    rating.prepend(img);
     const audio = new Audio('./assets/audio/correct.mp3');
-    console.log(audio)
     audio.play()
 }
 
@@ -20,8 +19,7 @@ const addStarWrong = () => {
     img.classList.add('star');
     img.setAttribute('src', './assets/img/star.svg');
     img.setAttribute('alt', 'star');
-    rating.append(img);
+    rating.prepend(img);
     const audio = new Audio('./assets/audio/error.mp3');
-    console.log(audio)
     audio.play()
 }

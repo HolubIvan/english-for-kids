@@ -121,9 +121,10 @@ body {
 
 .rating {
   width: 420px;
-  height: 50px;
+  height: 45px;
   grid-column: 3/5;
   margin-top: 30px;
+  overflow: hidden;
 }
 
 .star {
@@ -268,6 +269,20 @@ body {
 
 #switch-checkbox:checked ~ .switch__label {
   transform: translateX(62px);
+}
+
+.final-section {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.final-section__title {
+  position: fixed;
+  top: 10%;
+  left: 40%;
+  transform: translate(-10%, -50%);
+  font-size: 5rem;
 }
 
 .hamburger {
